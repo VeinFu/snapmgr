@@ -1,0 +1,28 @@
+upstream snapmgr {
+    server 127.0.0.1:8002;
+}
+
+server {
+    listen       8909;
+    server_name  localhost;
+
+    location / {
+        # 防止haproxy健康检查报错
+        if ($request_method = 'OPTIONS') {
+            return 200;
+        }
+        root   html;
+        index  index.html index.html;
+    }
+
+    location /snapmgr_api {
+        include  uwsgi_params;
+        uwsgi_pass  snapmgr;
+        client_max_body_size 35m;
+    }
+
+    error_page   500 502 503 504  /50x.html;
+        location = /50x.html {
+            root   html;
+        }
+}
