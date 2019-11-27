@@ -20,6 +20,8 @@ def get_cinder_client():
 
 def create_volume_snapshot(volume_id, snapshot_name):
     client = get_cinder_client()
+    snapshot_created_time = time.strftime('%Y-%m-%d_%H:%M:%S', time.localtime(time.time()))
+    snapshot_name = snapshot_name + '_' + snapshot_created_time
     client.volume_snapshots.create(volume_id, force=True, name=snapshot_name)
 
 
