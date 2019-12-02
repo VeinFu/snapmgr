@@ -20,7 +20,8 @@ class VolumeSnapshotJob(Resource):
         job_name = 'snapshot_create_for_volume_%s' % volume_id
         cron_trigger = request.get_json()['cron_trigger']
         snapshot_name = request.get_json()['snapshot_name']
-        scheduler.add_job(func=create_volume_snapshot, args=[volume_id, snapshot_name],
+        desc = request.get_json()['description']
+        scheduler.add_job(func=create_volume_snapshot, args=[volume_id, snapshot_name, desc],
                           trigger=CronTrigger.from_crontab(cron_trigger),
                           id=str(uuid.uuid4()), name=job_name, jobstore='default')
         return {'create_snapshot': 'success'}
@@ -33,5 +34,5 @@ class SnapshotPeriodicCleaningJob(Resource):
         job_name = 'snapshot_periodic_clean_for_volume_{}'.format(volume_id)
         expired_days = request.get_json()['expired_days']
         scheduler.add_job(func=clean_volume_snapshot, args=[volume_id, expired_days], trigger='cron',
-                          second='*/60', id=str(uuid.uuid4()), name=job_name, jobstore='default')
+                          second='*/50', id=str(uuid.uuid4()), name=job_name, jobstore='default')
         return {'clean_expired_snapshots': 'success'}
