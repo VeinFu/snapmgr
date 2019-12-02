@@ -39,9 +39,6 @@ class DevelopmentConfig(BasicConfig):
     SCHEDULER_API_ENABLED = True
     SCHEDULER_API_PREFIX = '/snapmgr_api'
 
-    LIBVIRT_KEEPALIVE_INTERVAL = 5
-    LIBVIRT_KEEPALIVE_COUNT = 5
-
     # cinder client configuration
     AUTH_URL = environs['auth_url'] if environs.get('auth_url') else "http://172.31.11.204:5000/v2.0"
     AUTH_VERSION = environs['auth_version'] if environs.get('auth_version') else "2"

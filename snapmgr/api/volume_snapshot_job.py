@@ -2,7 +2,6 @@
 """
 实现定时创建卷快照和定期删除卷快照逻辑
 """
-import time
 import uuid
 
 from apscheduler.triggers.cron import CronTrigger
