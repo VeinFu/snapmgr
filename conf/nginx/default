@@ -12,7 +12,7 @@ server {
     }
 
     location /snapmgr_api {
-        proxy_pass http://127.0.0.1:8002
+        proxy_pass http://127.0.0.1:8002;
         client_max_body_size 35m;
     }
 
