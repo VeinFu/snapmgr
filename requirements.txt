@@ -1,6 +1,6 @@
 aniso8601==8.0.0
 APScheduler==3.6.3
-Babel==2.7.0
+Babel==2.9.1
 certifi==2019.9.11
 chardet==3.0.4
 Click==7.0
